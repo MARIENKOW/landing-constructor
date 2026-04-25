@@ -5,7 +5,6 @@ export * from "./session/admin";
 export * from "./ChangePasswordDto";
 export * from "./ImageDto";
 export * from "./VideoDto";
-export * from "./BlogDto";
 export * from "./AdminInvitationDto";
 export * from "./AdminInvitationAcceptDto";
 export * from "./AdminManagementDto";

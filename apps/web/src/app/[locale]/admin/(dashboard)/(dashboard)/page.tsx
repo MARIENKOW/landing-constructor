@@ -1,3 +1,4 @@
+import LandingPage from "@/app/[locale]/admin/(dashboard)/(dashboard)/landing/LandingPage";
 import { NAV_GROUPS } from "@/app/[locale]/admin/(dashboard)/(dashboard)/nav.config";
 import AuthErrorElement from "@/components/feedback/error/AuthErrorElement";
 import MobileNavigation from "@/components/layout/navigation/MobileNavigation";
@@ -17,7 +18,7 @@ export default async function AdminHome({ searchParams }: Props) {
                 flexDirection={"column"}
                 sx={{ display: { xs: "none", md: "flex" } }}
             >
-                {/* <BlogPage searchParams={searchParams} /> */}
+                <LandingPage searchParams={searchParams} />
             </Box>
 
             <Box

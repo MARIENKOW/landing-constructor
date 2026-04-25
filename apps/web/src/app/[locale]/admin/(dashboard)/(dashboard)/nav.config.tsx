@@ -1,12 +1,26 @@
 import { NavGroup } from "@/components/layout/navigation/types";
 import { FULL_PATH_ROUTE } from "@myorg/shared/route";
-import NewspaperIcon from "@mui/icons-material/Newspaper";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PeopleIcon from "@mui/icons-material/People";
-import PersonIcon from "@mui/icons-material/Person";
+import WebIcon from "@mui/icons-material/Web";
 import { AdminDto } from "@myorg/shared/dto";
 
 export const NAV_GROUPS: (role: AdminDto["role"]) => NavGroup[] = (role) => [
+    {
+        items: [
+            {
+                label: "pages.admin.landing.name",
+                href: FULL_PATH_ROUTE.admin.landing.path,
+                activeLink: {
+                    strict: [
+                        FULL_PATH_ROUTE.admin.path,
+                    ],
+                    safe: [FULL_PATH_ROUTE.admin.landing.path],
+                },
+                icon: <WebIcon />,
+            },
+        ],
+    },
     {
         items: [
             ...(role === "SUPERADMIN"

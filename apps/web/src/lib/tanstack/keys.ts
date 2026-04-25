@@ -1,7 +1,15 @@
 import type {
     AdminParams,
     InvitationParams,
+    LandingParams,
 } from "@/lib/tanstack/listDefaults";
+
+
+export const landingKeys = {
+    all: ["landings"] as const,
+    lists: () => [...landingKeys.all, "list"] as const,
+    list: (params: LandingParams) => [...landingKeys.lists(), params] as const,
+};
 
 export const invitationKeys = {
     all: ["admin-invitations"] as const,

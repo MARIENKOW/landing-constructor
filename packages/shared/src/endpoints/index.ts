@@ -83,6 +83,9 @@ export const ENDPOINT = {
             path: "admin",
         },
     },
+    landing: {
+        path: "landing",
+    },
 } as const;
 
 type EdpointConfigType = typeof ENDPOINT;

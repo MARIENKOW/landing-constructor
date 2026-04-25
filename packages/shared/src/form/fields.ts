@@ -8,6 +8,17 @@ import {
     BLOG_TITLE_MIN_LENGTH,
     EMAIL_MAX_LENGTH,
     INVITATION_NOTE_MAX_LENGTH,
+    LANDING_LOGO_HEIGHT_DEFAULT,
+    LANDING_LOGO_HEIGHT_MAX,
+    LANDING_LOGO_HEIGHT_MIN,
+    LANDING_META_TITLE_MAX_LENGTH,
+    LANDING_META_TITLE_MIN_LENGTH,
+    LANDING_PHONE_MAX_LENGTH,
+    LANDING_PHONE_MIN_LENGTH,
+    LANDING_SUBTITLE_MAX_LENGTH,
+    LANDING_SUBTITLE_MIN_LENGTH,
+    LANDING_TITLE_MAX_LENGTH,
+    LANDING_TITLE_MIN_LENGTH,
     PASSWORD_MAX_LENGTH,
     PASSWORD_MIN_LENGTH,
 } from "./constants";
@@ -78,3 +89,47 @@ export const BlogBody = z
         (v) => stripHtml(v).length <= BLOG_BODY_MAX_LENGTH,
         getMessageKey("form.blog.body.max"),
     );
+
+export const LandingTitle = z
+    .string()
+    .nonempty(getMessageKey("form.required"))
+    .trim()
+    .normalize()
+    .min(LANDING_TITLE_MIN_LENGTH, { message: getMessageKey("form.landing.title.min") })
+    .max(LANDING_TITLE_MAX_LENGTH, getMessageKey("form.landing.title.max"));
+
+export const LandingSubtitle = z
+    .string()
+    .nonempty(getMessageKey("form.required"))
+    .trim()
+    .normalize()
+    .min(LANDING_SUBTITLE_MIN_LENGTH, { message: getMessageKey("form.landing.subtitle.min") })
+    .max(LANDING_SUBTITLE_MAX_LENGTH, getMessageKey("form.landing.subtitle.max"));
+
+export const LandingMetaTitle = z
+    .string()
+    .nonempty(getMessageKey("form.required"))
+    .trim()
+    .normalize()
+    .min(LANDING_META_TITLE_MIN_LENGTH, { message: getMessageKey("form.landing.metaTitle.min") })
+    .max(LANDING_META_TITLE_MAX_LENGTH, getMessageKey("form.landing.metaTitle.max"));
+
+export const LandingPhone = z
+    .string()
+    .nonempty(getMessageKey("form.required"))
+    .trim()
+    .min(LANDING_PHONE_MIN_LENGTH, { message: getMessageKey("form.landing.phone.min") })
+    .max(LANDING_PHONE_MAX_LENGTH, getMessageKey("form.landing.phone.max"));
+
+export const LandingColor = z
+    .string()
+    .nonempty(getMessageKey("form.required"))
+    .trim()
+    .regex(/^#[0-9a-fA-F]{6}$/, getMessageKey("form.landing.color.invalid"));
+
+export const LandingLogoHeight = z
+    .coerce.number()
+    .int()
+    .min(LANDING_LOGO_HEIGHT_MIN, { message: getMessageKey("form.landing.logoHeight.min") })
+    .max(LANDING_LOGO_HEIGHT_MAX, { message: getMessageKey("form.landing.logoHeight.max") })
+    .catch(LANDING_LOGO_HEIGHT_DEFAULT);

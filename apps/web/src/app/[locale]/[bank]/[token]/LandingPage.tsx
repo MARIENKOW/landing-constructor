@@ -4,18 +4,16 @@ import { StyledTypography } from "@/components/ui/StyledTypography";
 import { Box, Toolbar } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { LandingDto } from "@myorg/shared/dto";
+import HeaderUser from "@/components/layout/header/user/HeaderUser";
 
 export default function LandingPage({ landing }: { landing: LandingDto }) {
-    const { title, subtitle, phone, background, logo, color } = landing;
+    const { title, subtitle, phone, background, logo, color, logoHeight } =
+        landing;
     return (
         <Box display={"flex"} flexDirection={"column"} flex={1}>
-            <Box borderBottom={"1px solid"} borderColor={"divider"}>
-                <ContainerComponent py={false}>
-                    <Box py={2} display={"flex"} justifyContent={"center"}>
-                        <Box component={"img"} height={20} src={logo.url} />
-                    </Box>
-                </ContainerComponent>
-            </Box>
+            <HeaderUser>
+                <Box component={"img"} height={logoHeight} src={logo.url} />
+            </HeaderUser>
             <Box
                 sx={{
                     backgroundImage: `url('${background.url}')`,

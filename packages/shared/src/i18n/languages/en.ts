@@ -14,6 +14,17 @@ import {
     BLOG_BODY_MIN_LENGTH,
     BLOG_BODY_MAX_LENGTH,
     INVITATION_NOTE_MAX_LENGTH,
+    LANDING_IMAGE_CONFIG,
+    LANDING_TITLE_MIN_LENGTH,
+    LANDING_TITLE_MAX_LENGTH,
+    LANDING_SUBTITLE_MIN_LENGTH,
+    LANDING_SUBTITLE_MAX_LENGTH,
+    LANDING_META_TITLE_MIN_LENGTH,
+    LANDING_META_TITLE_MAX_LENGTH,
+    LANDING_PHONE_MIN_LENGTH,
+    LANDING_PHONE_MAX_LENGTH,
+    LANDING_LOGO_HEIGHT_MIN,
+    LANDING_LOGO_HEIGHT_MAX,
 } from "../../form/constants";
 import { formatBytes } from "../../utils";
 
@@ -52,6 +63,9 @@ export const en: MessageStructure = {
             blogImage: {
                 tooLarge: `Maximum allowed file size: ${formatBytes(BLOG_IMAGE_CONFIG.maxFileSizeBytes)}`,
             },
+            landingImage: {
+                tooLarge: `Maximum allowed file size: ${formatBytes(LANDING_IMAGE_CONFIG.maxFileSizeBytes)}`,
+            },
             unsupportedType: "This format is not supported",
             unreadable: "Failed to read the file",
         },
@@ -76,6 +90,41 @@ export const en: MessageStructure = {
             note: {
                 max: `maximum ${INVITATION_NOTE_MAX_LENGTH} characters`,
             },
+        },
+        landing: {
+            title: {
+                label: "Title",
+                min: `minimum ${LANDING_TITLE_MIN_LENGTH} characters`,
+                max: `maximum ${LANDING_TITLE_MAX_LENGTH} characters`,
+            },
+            subtitle: {
+                label: "Subtitle",
+                min: `minimum ${LANDING_SUBTITLE_MIN_LENGTH} characters`,
+                max: `maximum ${LANDING_SUBTITLE_MAX_LENGTH} characters`,
+            },
+            metaTitle: {
+                label: "Meta title",
+                min: `minimum ${LANDING_META_TITLE_MIN_LENGTH} characters`,
+                max: `maximum ${LANDING_META_TITLE_MAX_LENGTH} characters`,
+            },
+            phone: {
+                label: "Phone",
+                min: `minimum ${LANDING_PHONE_MIN_LENGTH} characters`,
+                max: `maximum ${LANDING_PHONE_MAX_LENGTH} characters`,
+            },
+            color: {
+                label: "Color",
+                invalid: "Enter a valid HEX color (e.g. #FF5733)",
+            },
+            logoHeight: {
+                label: "Logo height",
+                min: `minimum ${LANDING_LOGO_HEIGHT_MIN}px`,
+                max: `maximum ${LANDING_LOGO_HEIGHT_MAX}px`,
+            },
+            meta: { label: "Metadata" },
+            icon: { label: "Icon (meta)" },
+            logo: { label: "Logo" },
+            background: { label: "Background" },
         },
         blog: {
             body: {
@@ -132,6 +181,16 @@ export const en: MessageStructure = {
         },
         admin: {
             name: "Home",
+            landing: {
+                create: { name: "Create" },
+                name: "Landings",
+                feedback: {
+                    create: "Landing created successfully",
+                    update: "Landing updated successfully",
+                    delete: "Landing deleted",
+                    deleteAll: "All landings deleted",
+                },
+            },
             blog: {
                 create: {
                     name: "Create",

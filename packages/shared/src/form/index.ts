@@ -9,6 +9,7 @@ export * from "./schema/admin/AdminManagementSchema";
 export * from "./schema/admin/UserManagementSchema";
 export * from "./schema/admin/RegisterByInvitationAdminSchema";
 export * from "./schema/admin/AvatarAdminSchema";
+export * from "./schema/landing/Landing.schema";
 
 export * from "./types";
 export * from "./constants";

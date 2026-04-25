@@ -191,13 +191,22 @@ export class ImageService {
                     "bin";
                 filename = `${id}.${ext}`;
                 await fs.writeFile(path.join(folder, filename), file.buffer);
-                const meta = await sharp(file.buffer).metadata();
+                let width = 0;
+                let height = 0;
+                try {
+                    const meta = await sharp(file.buffer).metadata();
+                    width = meta.width ?? 0;
+                    height = meta.height ?? 0;
+                } catch {
+                    // Sharp не поддерживает некоторые форматы (ICO, JP2, JXL).
+                    // Файл уже сохранён как есть — размеры просто остаются нулями.
+                }
                 return {
                     id,
                     filename,
                     mimeType: file.mimetype,
-                    width: meta.width ?? 0,
-                    height: meta.height ?? 0,
+                    width,
+                    height,
                     size: file.size,
                 };
             } else if (options.mode === "webp") {

@@ -4,6 +4,15 @@ export const ROUTE = {
     path: "",
     admin: {
         path: "admin",
+        landing: {
+            path: "landing",
+            create: {
+                path: "create",
+            },
+            update: {
+                path: "update",
+            },
+        },
         settings: {
             path: "settings",
             profile: { path: "profile" },

@@ -8,6 +8,9 @@ model Image {
     width      Int
     admin Admin? // обратная связь — без неё Prisma не скомпилирует
     video Video? // обратная связь — без неё Prisma не скомпилирует
+    landingIcon       Landing? @relation("LandingIcon")
+    landingLogo       Landing? @relation("LandingLogo")
+    landingBackground Landing? @relation("LandingBackground")
     height     Int
     size       Int             // байты
     createdAt  DateTime        @default(now())

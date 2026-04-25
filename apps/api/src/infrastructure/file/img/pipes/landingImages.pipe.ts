@@ -1,0 +1,80 @@
+import { PipeTransform, Injectable } from "@nestjs/common";
+import { fromBuffer } from "file-type";
+import { AllowedImageMimeType } from "../image.config";
+import { LANDING_IMAGE_CONFIG, LandingOutput } from "@myorg/shared/form";
+import { ValidationException } from "@/common/exception/validation.exception";
+
+export type LandingFiles = {
+    icon: Express.Multer.File;
+    logo: Express.Multer.File;
+    background: Express.Multer.File;
+};
+
+export type LandingUpdateFiles = {
+    icon: Express.Multer.File | null;
+    logo: Express.Multer.File | null;
+    background: Express.Multer.File | null;
+};
+
+type RawFiles = {
+    icon?: Express.Multer.File[];
+    logo?: Express.Multer.File[];
+    background?: Express.Multer.File[];
+};
+
+@Injectable()
+export class LandingImagesValidationPipe implements PipeTransform {
+    private required: boolean;
+
+    constructor({ required = true }: { required?: boolean }) {
+        this.required = required;
+    }
+
+    async transform(raw: RawFiles): Promise<LandingFiles | LandingUpdateFiles> {
+        const icon = await this.validateOne(raw.icon?.[0], "icon");
+        const logo = await this.validateOne(raw.logo?.[0], "logo");
+        const background = await this.validateOne(
+            raw.background?.[0],
+            "background",
+        );
+        return { icon, logo, background } as LandingFiles | LandingUpdateFiles;
+    }
+
+    private async validateOne(
+        file: Express.Multer.File | undefined,
+        field: keyof Pick<LandingOutput, "icon" | "logo" | "background">,
+    ): Promise<Express.Multer.File | null> {
+        if (!file) {
+            if (this.required)
+                throw new ValidationException<LandingOutput>({
+                    fields: { [field]: ["form.required"] } as any,
+                });
+            return null;
+        }
+
+        const detected = await fromBuffer(file.buffer);
+        console.log(detected?.mime);
+        console.log(LANDING_IMAGE_CONFIG.allowedMimeTypes);
+
+        if (
+            !detected ||
+            !LANDING_IMAGE_CONFIG.allowedMimeTypes.includes(
+                detected.mime as AllowedImageMimeType,
+            )
+        ) {
+            throw new ValidationException<LandingOutput>({
+                fields: { [field]: ["form.file.unsupportedType"] } as any,
+            });
+        }
+
+        file.mimetype = detected.mime;
+
+        if (file.size > LANDING_IMAGE_CONFIG.maxFileSizeBytes) {
+            throw new ValidationException<LandingOutput>({
+                fields: { [field]: ["form.file.landingImage.tooLarge"] } as any,
+            });
+        }
+
+        return file;
+    }
+}

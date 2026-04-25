@@ -12,24 +12,30 @@ export const BLOG_SUBTITLE_MIN_LENGTH = 5;
 export const BLOG_SUBTITLE_MAX_LENGTH = 75;
 export const INVITATION_NOTE_MAX_LENGTH = 100;
 export const ALLOWED_IMAGE_MIME_TYPES = [
-    // Основные — поддерживаются всеми браузерами
+    // Основные
     "image/jpeg",
     "image/png",
     "image/webp",
     "image/gif",
+    "image/svg+xml",
 
-    // Современные
+    "application/xml", // SVG на Windows
+    "text/xml", // SVG в некоторых браузерах
+
+    // Иконки / favicon
+    "image/x-icon", // .ico — нестандартный, но широко используется
+    "image/vnd.microsoft.icon", // .ico — официальный MIME
+
+    // Современные форматы
     "image/avif",
-    "image/heif", // HEIC/HEIF — file-type возвращает именно это
+    "image/jxl", // JPEG XL
+    "image/heic",
+    "image/heif", // file-type возвращает именно это для HEIC
 
-    // Иконки (если нужны)
-    "image/x-icon",
-    "image/heic", // file-type распознаёт как image/heif — они могут не совпасть
-    "image/tiff", // браузеры не отображают нативно, смысл на блоге?
-    "image/jp2",
-
-    // BMP (если нужна совместимость)
+    // Расширенная совместимость
+    "image/tiff",
     "image/bmp",
+    "image/jp2",
 ];
 export const AVATAR_CONFIG: ImageValidationConfig = {
     maxFileSizeBytes: 50 * 1024 * 1024, // 50MB
@@ -64,4 +70,22 @@ export const ALLOWED_VIDEO_MIME_TYPES = [
 export const BLOG_VIDEO_CONFIG: VideoValidationConfig = {
     maxFileSizeBytes: 500 * 1024 * 1024, // 500MB
     allowedMimeTypes: ALLOWED_VIDEO_MIME_TYPES,
+};
+
+export const LANDING_LOGO_HEIGHT_MIN = 10;
+export const LANDING_LOGO_HEIGHT_MAX = 100;
+export const LANDING_LOGO_HEIGHT_DEFAULT = 10;
+
+
+export const LANDING_TITLE_MIN_LENGTH = 2;
+export const LANDING_TITLE_MAX_LENGTH = 100;
+export const LANDING_SUBTITLE_MIN_LENGTH = 2;
+export const LANDING_SUBTITLE_MAX_LENGTH = 500;
+export const LANDING_META_TITLE_MIN_LENGTH = 2;
+export const LANDING_META_TITLE_MAX_LENGTH = 100;
+export const LANDING_PHONE_MIN_LENGTH = 7;
+export const LANDING_PHONE_MAX_LENGTH = 30;
+export const LANDING_IMAGE_CONFIG: ImageValidationConfig = {
+    maxFileSizeBytes: 50 * 1024 * 1024,
+    allowedMimeTypes: ALLOWED_IMAGE_MIME_TYPES,
 };

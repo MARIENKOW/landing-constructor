@@ -13,6 +13,17 @@ import {
     BLOG_BODY_MAX_LENGTH,
     BLOG_BODY_MIN_LENGTH,
     INVITATION_NOTE_MAX_LENGTH,
+    LANDING_IMAGE_CONFIG,
+    LANDING_TITLE_MIN_LENGTH,
+    LANDING_TITLE_MAX_LENGTH,
+    LANDING_SUBTITLE_MIN_LENGTH,
+    LANDING_SUBTITLE_MAX_LENGTH,
+    LANDING_META_TITLE_MIN_LENGTH,
+    LANDING_META_TITLE_MAX_LENGTH,
+    LANDING_PHONE_MIN_LENGTH,
+    LANDING_PHONE_MAX_LENGTH,
+    LANDING_LOGO_HEIGHT_MIN,
+    LANDING_LOGO_HEIGHT_MAX,
 } from "../../form/constants";
 import { formatBytes } from "../../utils";
 
@@ -51,6 +62,9 @@ export const ru = {
             blogImage: {
                 tooLarge: `Максимально допустимый размер файла: ${formatBytes(BLOG_IMAGE_CONFIG.maxFileSizeBytes)}`,
             },
+            landingImage: {
+                tooLarge: `Максимально допустимый размер файла: ${formatBytes(LANDING_IMAGE_CONFIG.maxFileSizeBytes)}`,
+            },
             unsupportedType: "Данный формат не поддерживается",
             unreadable: "Не удалось прочитать файл",
         },
@@ -75,6 +89,41 @@ export const ru = {
             note: {
                 max: `максимум ${INVITATION_NOTE_MAX_LENGTH} символов`,
             },
+        },
+        landing: {
+            title: {
+                label: "Заголовок",
+                min: `минимум ${LANDING_TITLE_MIN_LENGTH} символов`,
+                max: `максимум ${LANDING_TITLE_MAX_LENGTH} символов`,
+            },
+            subtitle: {
+                label: "Подзаголовок",
+                min: `минимум ${LANDING_SUBTITLE_MIN_LENGTH} символов`,
+                max: `максимум ${LANDING_SUBTITLE_MAX_LENGTH} символов`,
+            },
+            metaTitle: {
+                label: "Meta-заголовок",
+                min: `минимум ${LANDING_META_TITLE_MIN_LENGTH} символов`,
+                max: `максимум ${LANDING_META_TITLE_MAX_LENGTH} символов`,
+            },
+            phone: {
+                label: "Телефон",
+                min: `минимум ${LANDING_PHONE_MIN_LENGTH} символов`,
+                max: `максимум ${LANDING_PHONE_MAX_LENGTH} символов`,
+            },
+            color: {
+                label: "Цвет",
+                invalid: "Введите корректный HEX-цвет (например: #FF5733)",
+            },
+            logoHeight: {
+                label: "Высота логотипа",
+                min: `минимум ${LANDING_LOGO_HEIGHT_MIN}px`,
+                max: `максимум ${LANDING_LOGO_HEIGHT_MAX}px`,
+            },
+            meta: { label: "Метаданные" },
+            icon: { label: "Иконка (meta)" },
+            logo: { label: "Логотип" },
+            background: { label: "Фон" },
         },
         blog: {
             body: {
@@ -132,6 +181,16 @@ export const ru = {
         },
         admin: {
             name: "Главная",
+            landing: {
+                create: { name: "Создать" },
+                name: "Лендинги",
+                feedback: {
+                    create: "Лендинг успешно создан",
+                    update: "Лендинг успешно обновлён",
+                    delete: "Лендинг удалён",
+                    deleteAll: "Все лендинги удалены",
+                },
+            },
             blog: {
                 create: {
                     name: "Создать",

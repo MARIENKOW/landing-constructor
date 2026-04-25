@@ -12,12 +12,14 @@ import { ChangePasswordAdminModule } from "@/modules/admin/ChangePasswordCode/ch
 import { FileModule } from "@/infrastructure/file/file.module";
 import { AdminInvitationModule } from "@/modules/admin/invitation/adminInvitation.module";
 import { AdminManagementModule } from "@/modules/admin/management/adminManagement.module";
+import { LandingModule } from "@/modules/landing/landing.module";
 @Module({
     imports: [
         CoreModule,
         AuthAdminModule,
         ChangePasswordAdminModule,
         RequestContextModule,
+        LandingModule,
         FileModule,
         AdminInvitationModule,
         AdminManagementModule,

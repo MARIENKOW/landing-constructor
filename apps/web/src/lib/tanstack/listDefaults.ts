@@ -6,6 +6,16 @@ import { Pagination } from "./pagination";
  * (для SSR prefetch) и в client hooks.
  */
 
+export type LandingParams = Pagination & {
+    order: "desc" | "asc";
+    query: string;
+};
+export const defaultLandingParams: LandingParams = {
+    page: 1,
+    order: "desc",
+    query: "",
+};
+
 // --- Invitation ---
 type InvitationFilters = {
     status: "all" | "active" | "expired" | "revoked";

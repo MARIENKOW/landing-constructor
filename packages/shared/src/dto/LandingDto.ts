@@ -1,14 +1,18 @@
 import { ImageDto } from "./ImageDto";
 
 export type LandingDto = {
+    id: string;
     meta: {
         title: string;
         icon: ImageDto;
     };
     logo: ImageDto;
+    logoHeight: number;
     color: string;
     phone: string;
     title: string;
     background: ImageDto;
     subtitle: string;
+    createdAt: string;
+    updatedAt: string;
 };
