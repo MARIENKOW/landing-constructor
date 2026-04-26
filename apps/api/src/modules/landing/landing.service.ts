@@ -14,6 +14,7 @@ const LANDING_INCLUDE = {
     icon: true,
     logo: true,
     background: true,
+    _count: { select: { tokens: true } },
 } as const;
 
 @Injectable()
@@ -222,6 +223,14 @@ export class LandingService {
         });
         if (!data) throw new NotFoundException();
         return mapLanding(data);
+    }
+
+    async getByToken(id: string, token: string): Promise<LandingDto> {
+        const tokenRecord = await this.prisma.landingToken.findFirst({
+            where: { landingId: id, token },
+        });
+        if (!tokenRecord) throw new NotFoundException();
+        return this.get(id);
     }
 
     async delete(id: string): Promise<void> {

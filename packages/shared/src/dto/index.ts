@@ -9,3 +9,4 @@ export * from "./AdminInvitationDto";
 export * from "./AdminInvitationAcceptDto";
 export * from "./AdminManagementDto";
 export * from "./LandingDto";
+export * from "./LandingTokenDto";

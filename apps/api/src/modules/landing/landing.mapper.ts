@@ -10,6 +10,7 @@ export const mapLanding = (landing: LandingWithImages): LandingDto => ({
     },
     logo: mapImage(landing.logo),
     logoHeight: landing.logoHeight,
+    tokenCount: landing._count.tokens,
     color: landing.color,
     phone: landing.phone,
     title: landing.title,

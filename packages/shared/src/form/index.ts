@@ -10,6 +10,7 @@ export * from "./schema/admin/UserManagementSchema";
 export * from "./schema/admin/RegisterByInvitationAdminSchema";
 export * from "./schema/admin/AvatarAdminSchema";
 export * from "./schema/landing/Landing.schema";
+export * from "./schema/landing/LandingToken.schema";
 
 export * from "./types";
 export * from "./constants";

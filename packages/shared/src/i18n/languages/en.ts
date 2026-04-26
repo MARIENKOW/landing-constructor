@@ -190,6 +190,28 @@ export const en: MessageStructure = {
                     delete: "Landing deleted",
                     deleteAll: "All landings deleted",
                 },
+                token: {
+                    name: "Accesses",
+                    actions: {
+                        create: "Create access",
+                        delete: "Delete",
+                        addNote: "Add note",
+                    },
+                    linkCopied: "Link copied",
+                    noteLabel: "Note",
+                    notePlaceholder: "E.g. for which client",
+                    createdAt: "Created {time}",
+                    empty: "No accesses yet",
+                    form: {
+                        title: "New access",
+                        note: "Note",
+                    },
+                    feedback: {
+                        created: "Access created",
+                        deleted: "Access deleted",
+                        noteUpdated: "Note updated",
+                    },
+                },
             },
             blog: {
                 create: {

@@ -15,6 +15,7 @@ export default class LandingService {
     delete: (id: string) => FetchCustomReturn<void>;
     deleteAll: () => FetchCustomReturn<void>;
     get: (id: string) => FetchCustomReturn<LandingDto>;
+    getByToken: (params: { id: string; token: string }) => FetchCustomReturn<LandingDto>;
 
     constructor(api: FetchCustom) {
         this.create = (body) =>
@@ -36,5 +37,7 @@ export default class LandingService {
         this.delete = (id) => api<void>(`${path}/${id}`, { method: "DELETE" });
         this.deleteAll = () => api<void>(path, { method: "DELETE" });
         this.get = (id) => api<LandingDto>(`${path}/${id}`, { method: "GET" });
+        this.getByToken = ({ id, token }) =>
+            api<LandingDto>(`${path}/${id}/token/${token}`, { method: "GET" });
     }
 }

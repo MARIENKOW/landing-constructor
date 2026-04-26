@@ -16,6 +16,16 @@ export const defaultLandingParams: LandingParams = {
     query: "",
 };
 
+export type LandingTokenParams = Pagination & {
+    order: "desc" | "asc";
+    query: string;
+};
+export const defaultLandingTokenParams: LandingTokenParams = {
+    page: 1,
+    order: "desc",
+    query: "",
+};
+
 // --- Invitation ---
 type InvitationFilters = {
     status: "all" | "active" | "expired" | "revoked";

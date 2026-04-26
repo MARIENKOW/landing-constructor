@@ -18,5 +18,7 @@ model Landing {
     backgroundId String  @unique
     background   Image   @relation("LandingBackground", fields: [backgroundId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
+    tokens       LandingToken[]
+
     @@map("landings")
 }

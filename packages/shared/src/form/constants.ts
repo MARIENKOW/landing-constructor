@@ -74,7 +74,7 @@ export const BLOG_VIDEO_CONFIG: VideoValidationConfig = {
 
 export const LANDING_LOGO_HEIGHT_MIN = 10;
 export const LANDING_LOGO_HEIGHT_MAX = 100;
-export const LANDING_LOGO_HEIGHT_DEFAULT = 10;
+export const LANDING_LOGO_HEIGHT_DEFAULT = 40;
 
 
 export const LANDING_TITLE_MIN_LENGTH = 2;

@@ -3,6 +3,7 @@ import { SyntheticEvent, useState } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
+import KeyIcon from "@mui/icons-material/Key";
 import { StyledIconButton } from "@/components/ui/StyledIconButton";
 import { StyledMenu } from "@/components/ui/StyledMenu";
 import { StyledMenuItem } from "@/components/ui/StyledMenuItem";
@@ -70,6 +71,14 @@ const LandingItem = ({ landing }: { landing: LandingDto }) => {
                             <EditIcon />
                         </StyledListItemIcon>
                         {t("common.update")}
+                    </StyledMenuItem>
+                </Link>
+                <Link href={`${FULL_PATH_ROUTE.admin.landing.path}/${landing.id}/tokens`}>
+                    <StyledMenuItem onClick={() => setAnchorEl(null)}>
+                        <StyledListItemIcon>
+                            <KeyIcon />
+                        </StyledListItemIcon>
+                        {t("pages.admin.landing.token.name")}
                     </StyledMenuItem>
                 </Link>
                 <StyledMenuItem
@@ -168,6 +177,12 @@ const LandingItem = ({ landing }: { landing: LandingDto }) => {
                             label={landing.phone}
                             size="small"
                             variant="outlined"
+                        />
+                        <Chip
+                            label={landing.tokenCount}
+                            size="small"
+                            variant="outlined"
+                            color="primary"
                         />
                     </Box>
                     <StyledIconButton

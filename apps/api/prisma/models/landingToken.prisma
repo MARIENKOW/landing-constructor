@@ -1,0 +1,10 @@
+model LandingToken {
+    id        String   @id @default(uuid())
+    token     String   @unique
+    note      String?
+    landingId String
+    landing   Landing  @relation(fields: [landingId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now())
+
+    @@map("landing_tokens")
+}

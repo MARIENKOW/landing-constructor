@@ -13,6 +13,7 @@ export type LandingDto = {
     title: string;
     background: ImageDto;
     subtitle: string;
+    tokenCount: number;
     createdAt: string;
     updatedAt: string;
 };

@@ -9,14 +9,14 @@ type Params = {
     params: Promise<{ locale: string; bank: string; token: string }>;
 };
 
-const { get } = new LandingService($apiServer);
+const { getByToken } = new LandingService($apiServer);
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
     const { bank, token } = await params;
 
     let data;
     try {
-        const body = await get(bank);
+        const body = await getByToken({ id: bank, token });
         data = body.data;
     } catch (error) {}
 
@@ -29,11 +29,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Params) {
-    const { token, bank } = await params;
+    const { bank, token } = await params;
 
     let data;
     try {
-        const body = await get(bank);
+        const body = await getByToken({ id: bank, token });
         data = body.data;
     } catch (error) {
         return redirect("https://www.google.com/");
