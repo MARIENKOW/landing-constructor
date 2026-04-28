@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     return {
         title: data?.meta.title,
         icons: {
-            icon: data?.meta.icon,
+            icon: data?.meta.icon || undefined,
         },
     };
 }

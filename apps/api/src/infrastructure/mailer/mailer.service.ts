@@ -23,7 +23,7 @@ export class MailerService implements OnModuleInit {
         this.transporter = nodemailer.createTransport({
             // debug: true,
             // logger: true,
-            secure: true,
+            secure: env.SMTP_SECURE,
             host: env.SMTP_HOST,
             port: env.SMTP_PORT,
             auth: {

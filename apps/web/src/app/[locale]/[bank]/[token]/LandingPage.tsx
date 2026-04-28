@@ -118,6 +118,7 @@ export default function LandingPage({
                             component={"img"}
                             width={28}
                             height={28}
+                            sx={{ fill: color, color }}
                             src={"/Globe.svg"}
                         />
                     </Box>
