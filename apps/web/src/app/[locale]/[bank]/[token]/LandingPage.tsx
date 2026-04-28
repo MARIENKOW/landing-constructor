@@ -6,9 +6,23 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { LandingDto } from "@myorg/shared/dto";
 import HeaderUser from "@/components/layout/header/user/HeaderUser";
 
-export default function LandingPage({ landing }: { landing: LandingDto }) {
-    const { title, subtitle, phone, background, logo, color, logoHeight, btnName } =
-        landing;
+export default function LandingPage({
+    landing,
+    admin = false,
+}: {
+    landing: LandingDto;
+    admin?: boolean;
+}) {
+    const {
+        title,
+        subtitle,
+        phone,
+        background,
+        logo,
+        color,
+        logoHeight,
+        btnName,
+    } = landing;
     return (
         <Box display={"flex"} flexDirection={"column"} flex={1}>
             <HeaderUser>
@@ -21,6 +35,7 @@ export default function LandingPage({ landing }: { landing: LandingDto }) {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }}
+                minHeight={150}
                 flex={1}
                 display={"flex"}
                 justifyContent={"center"}
@@ -36,10 +51,23 @@ export default function LandingPage({ landing }: { landing: LandingDto }) {
                     width={"100%"}
                     p={2}
                 >
-                    <StyledTypography fontSize={30} color="#fff" variant="h1">
+                    <StyledTypography
+                        fontSize={admin ? 20 : 30}
+                        color="#fff"
+                        variant="h1"
+                    >
                         {title}
                     </StyledTypography>
-                    <StyledTypography color="#fff">{subtitle}</StyledTypography>
+                    {subtitle ? (
+                        <StyledTypography
+                            fontSize={admin ? 12 : 14}
+                            color="#fff"
+                        >
+                            {subtitle}
+                        </StyledTypography>
+                    ) : (
+                        ""
+                    )}
                 </Box>
             </Box>
             <Box>
@@ -85,7 +113,7 @@ export default function LandingPage({ landing }: { landing: LandingDto }) {
                     alignItems={"center"}
                     display={"flex"}
                 >
-                    <Box p={2}>
+                    <Box p={admin ? 1 : 2}>
                         <Box
                             component={"img"}
                             width={28}
@@ -94,14 +122,18 @@ export default function LandingPage({ landing }: { landing: LandingDto }) {
                         />
                     </Box>
                     <Box
-                        py={2}
-                        pr={2}
+                        py={admin ? 1 : 2}
+                        pr={admin ? 1 : 2}
                         display={"flex"}
                         flexDirection={"column"}
                     >
-                        <Box display={"flex"} alignItems={"center"} gap={1}>
+                        <Box
+                            display={"flex"}
+                            alignItems={"center"}
+                            gap={admin ? 0.5 : 1}
+                        >
                             <StyledTypography
-                                fontSize={17}
+                                fontSize={admin ? 14 : 17}
                                 fontWeight={500}
                                 display={"inline-flex"}
                             >
@@ -109,7 +141,7 @@ export default function LandingPage({ landing }: { landing: LandingDto }) {
                             </StyledTypography>
                             <ArrowForwardIosIcon sx={{ color, fill: color }} />
                         </Box>
-                        <StyledTypography fontSize={12}>
+                        <StyledTypography fontSize={admin ? 10 : 12}>
                             {phone}
                         </StyledTypography>
                     </Box>

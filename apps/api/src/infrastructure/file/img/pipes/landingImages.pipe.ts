@@ -5,7 +5,7 @@ import { LANDING_IMAGE_CONFIG, LandingOutput } from "@myorg/shared/form";
 import { ValidationException } from "@/common/exception/validation.exception";
 
 export type LandingFiles = {
-    icon: Express.Multer.File;
+    icon: Express.Multer.File | null;
     logo: Express.Multer.File;
     background: Express.Multer.File;
 };
@@ -31,21 +31,19 @@ export class LandingImagesValidationPipe implements PipeTransform {
     }
 
     async transform(raw: RawFiles): Promise<LandingFiles | LandingUpdateFiles> {
-        const icon = await this.validateOne(raw.icon?.[0], "icon");
-        const logo = await this.validateOne(raw.logo?.[0], "logo");
-        const background = await this.validateOne(
-            raw.background?.[0],
-            "background",
-        );
+        const icon = await this.validateOne(raw.icon?.[0], "icon", false);
+        const logo = await this.validateOne(raw.logo?.[0], "logo", this.required);
+        const background = await this.validateOne(raw.background?.[0], "background", this.required);
         return { icon, logo, background } as LandingFiles | LandingUpdateFiles;
     }
 
     private async validateOne(
         file: Express.Multer.File | undefined,
         field: keyof Pick<LandingOutput, "icon" | "logo" | "background">,
+        required: boolean,
     ): Promise<Express.Multer.File | null> {
         if (!file) {
-            if (this.required)
+            if (required)
                 throw new ValidationException<LandingOutput>({
                     fields: { [field]: ["form.required"] } as any,
                 });

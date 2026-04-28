@@ -6,7 +6,7 @@ export const mapLanding = (landing: LandingWithImages): LandingDto => ({
     id: landing.id,
     meta: {
         title: landing.metaTitle,
-        icon: mapImage(landing.icon),
+        icon: landing.icon ? mapImage(landing.icon) : null,
     },
     logo: mapImage(landing.logo),
     logoHeight: landing.logoHeight,

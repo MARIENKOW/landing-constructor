@@ -43,16 +43,14 @@ const LandingForm = ({
     const form = useForm<LandingInput, LandingOutput>({
         resolver: zodResolver(LandingSchema),
         defaultValues: {
-            icon: initData?.meta.icon.url || null,
+            icon: initData?.meta.icon?.url || null,
             logo: initData?.logo.url || null,
             background: initData?.background.url || null,
             metaTitle: initData?.meta.title || "",
             color: initData?.color || "#f90c0c",
             phone: initData?.phone || "",
             title: initData?.title || "Экстренная связь",
-            subtitle:
-                initData?.subtitle ||
-                "Наша служба поддержки доступна 24/7 и готова оперативно помочь вам защитить ваши средства и данные.",
+            subtitle: initData?.subtitle || "",
             logoHeight: initData?.logoHeight ?? LANDING_LOGO_HEIGHT_DEFAULT,
             btnName: initData?.btnName || "Кнопка связи",
         },
@@ -72,7 +70,12 @@ const LandingForm = ({
         try {
             await onRequest(formValues);
         } catch (error) {
-            errorFormHandlerWithAlert({ error, t, formValues, setError });
+            errorFormHandlerWithAlert<LandingOutput>({
+                error,
+                t,
+                formValues,
+                setError,
+            });
         }
     };
 
@@ -119,6 +122,7 @@ const LandingForm = ({
                                     accept={
                                         LANDING_IMAGE_CONFIG.allowedMimeTypes
                                     }
+                                    helperText={t("form.optional")}
                                     previewProps={{
                                         objectFit: "contain",
                                         width: 30,
@@ -130,6 +134,7 @@ const LandingForm = ({
                                 />
                                 <FormTextField<LandingInput>
                                     name="metaTitle"
+                                    helperText={t("form.optional")}
                                     label="form.landing.metaTitle.label"
                                 />
                             </Box>
@@ -215,6 +220,7 @@ const LandingForm = ({
                                     <FormTextField<LandingInput>
                                         name="subtitle"
                                         label="form.landing.subtitle.label"
+                                        helperText={t("form.optional")}
                                         multiline
                                     />
                                 </Grid>

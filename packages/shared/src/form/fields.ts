@@ -97,30 +97,12 @@ export const LandingTitle = z
     .nonempty(getMessageKey("form.required"))
     .trim()
     .normalize()
-    .min(LANDING_TITLE_MIN_LENGTH, { message: getMessageKey("form.landing.title.min") })
     .max(LANDING_TITLE_MAX_LENGTH, getMessageKey("form.landing.title.max"));
-
-export const LandingSubtitle = z
-    .string()
-    .nonempty(getMessageKey("form.required"))
-    .trim()
-    .normalize()
-    .min(LANDING_SUBTITLE_MIN_LENGTH, { message: getMessageKey("form.landing.subtitle.min") })
-    .max(LANDING_SUBTITLE_MAX_LENGTH, getMessageKey("form.landing.subtitle.max"));
-
-export const LandingMetaTitle = z
-    .string()
-    .nonempty(getMessageKey("form.required"))
-    .trim()
-    .normalize()
-    .min(LANDING_META_TITLE_MIN_LENGTH, { message: getMessageKey("form.landing.metaTitle.min") })
-    .max(LANDING_META_TITLE_MAX_LENGTH, getMessageKey("form.landing.metaTitle.max"));
 
 export const LandingPhone = z
     .string()
     .nonempty(getMessageKey("form.required"))
     .trim()
-    .min(LANDING_PHONE_MIN_LENGTH, { message: getMessageKey("form.landing.phone.min") })
     .max(LANDING_PHONE_MAX_LENGTH, getMessageKey("form.landing.phone.max"));
 
 export const LandingColor = z
@@ -134,12 +116,18 @@ export const LandingBtnName = z
     .nonempty(getMessageKey("form.required"))
     .trim()
     .normalize()
-    .min(LANDING_BTN_NAME_MIN_LENGTH, { message: getMessageKey("form.landing.btnName.min") })
-    .max(LANDING_BTN_NAME_MAX_LENGTH, getMessageKey("form.landing.btnName.max"));
+    .max(
+        LANDING_BTN_NAME_MAX_LENGTH,
+        getMessageKey("form.landing.btnName.max"),
+    );
 
-export const LandingLogoHeight = z
-    .coerce.number()
+export const LandingLogoHeight = z.coerce
+    .number()
     .int()
-    .min(LANDING_LOGO_HEIGHT_MIN, { message: getMessageKey("form.landing.logoHeight.min") })
-    .max(LANDING_LOGO_HEIGHT_MAX, { message: getMessageKey("form.landing.logoHeight.max") })
+    .min(LANDING_LOGO_HEIGHT_MIN, {
+        message: getMessageKey("form.landing.logoHeight.min"),
+    })
+    .max(LANDING_LOGO_HEIGHT_MAX, {
+        message: getMessageKey("form.landing.logoHeight.max"),
+    })
     .catch(LANDING_LOGO_HEIGHT_DEFAULT);

@@ -90,7 +90,6 @@ export class LandingController {
         return this.landing.getAll(page, limit, order, query);
     }
 
-
     @Get(":id")
     @Public()
     async get(@Param("id") id: string): Promise<LandingDto> {

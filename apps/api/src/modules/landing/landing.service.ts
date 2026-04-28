@@ -31,12 +31,14 @@ export class LandingService {
     ): Promise<LandingDto> {
         const uploaded: string[] = [];
         try {
-            const iconDto = await this.image.upload(
-                files.icon,
-                FileEntityType.LANDING_ICON,
-                { mode: "original" },
-            );
-            uploaded.push(iconDto.id);
+            const iconDto = files.icon
+                ? await this.image.upload(
+                      files.icon,
+                      FileEntityType.LANDING_ICON,
+                      { mode: "original" },
+                  )
+                : null;
+            if (iconDto) uploaded.push(iconDto.id);
 
             const logoDto = await this.image.upload(
                 files.logo,
@@ -51,11 +53,25 @@ export class LandingService {
                 { mode: "original" },
             );
             uploaded.push(backgroundDto.id);
-
+            const {
+                logoHeight,
+                title,
+                metaTitle,
+                subtitle,
+                btnName,
+                color,
+                phone,
+            } = body;
             const landing = await this.prisma.landing.create({
                 data: {
-                    ...body,
-                    iconId: iconDto.id,
+                    metaTitle,
+                    subtitle,
+                    title,
+                    logoHeight,
+                    btnName,
+                    color,
+                    phone,
+                    ...(iconDto ? { iconId: iconDto.id } : {}),
                     logoId: logoDto.id,
                     backgroundId: backgroundDto.id,
                 },
@@ -98,6 +114,7 @@ export class LandingService {
 
         const newIds: Record<string, string> = {};
         const uploadedForRollback: string[] = [];
+        let iconRemoved = false;
 
         try {
             if (files.icon) {
@@ -108,6 +125,8 @@ export class LandingService {
                 );
                 newIds.iconId = dto.id;
                 uploadedForRollback.push(dto.id);
+            } else if (!data.icon && landing.iconId) {
+                iconRemoved = true;
             }
             if (files.logo) {
                 const dto = await this.image.upload(
@@ -128,34 +147,61 @@ export class LandingService {
                 uploadedForRollback.push(dto.id);
             }
 
+            const {
+                logoHeight,
+                title,
+                metaTitle,
+                subtitle,
+                btnName,
+                color,
+                phone,
+            } = data;
+
             const updated = await this.prisma.landing.update({
                 where: { id },
-                data: { ...data, ...newIds },
+                data: {
+                    logoHeight,
+                    title,
+                    metaTitle,
+                    subtitle,
+                    btnName,
+                    color,
+                    phone,
+                    ...newIds,
+                    ...(iconRemoved ? { iconId: null } : {}),
+                },
                 include: LANDING_INCLUDE,
             });
 
             await Promise.allSettled([
-                newIds.iconId &&
-                    this.image.delete(landing.iconId).catch((e) =>
-                        this.logger.error(
-                            `Old icon not removed [imageId=${landing.iconId}]`,
-                            e,
+                (newIds.iconId || iconRemoved) &&
+                    landing.iconId &&
+                    this.image
+                        .delete(landing.iconId)
+                        .catch((e) =>
+                            this.logger.error(
+                                `Old icon not removed [imageId=${landing.iconId}]`,
+                                e,
+                            ),
                         ),
-                    ),
                 newIds.logoId &&
-                    this.image.delete(landing.logoId).catch((e) =>
-                        this.logger.error(
-                            `Old logo not removed [imageId=${landing.logoId}]`,
-                            e,
+                    this.image
+                        .delete(landing.logoId)
+                        .catch((e) =>
+                            this.logger.error(
+                                `Old logo not removed [imageId=${landing.logoId}]`,
+                                e,
+                            ),
                         ),
-                    ),
                 newIds.backgroundId &&
-                    this.image.delete(landing.backgroundId).catch((e) =>
-                        this.logger.error(
-                            `Old background not removed [imageId=${landing.backgroundId}]`,
-                            e,
+                    this.image
+                        .delete(landing.backgroundId)
+                        .catch((e) =>
+                            this.logger.error(
+                                `Old background not removed [imageId=${landing.backgroundId}]`,
+                                e,
+                            ),
                         ),
-                    ),
             ]);
 
             return mapLanding(updated);
@@ -193,8 +239,18 @@ export class LandingService {
             ? {
                   OR: [
                       { title: { contains: q, mode: "insensitive" as const } },
-                      { subtitle: { contains: q, mode: "insensitive" as const } },
-                      { metaTitle: { contains: q, mode: "insensitive" as const } },
+                      {
+                          subtitle: {
+                              contains: q,
+                              mode: "insensitive" as const,
+                          },
+                      },
+                      {
+                          metaTitle: {
+                              contains: q,
+                              mode: "insensitive" as const,
+                          },
+                      },
                   ],
               }
             : {};
@@ -245,24 +301,31 @@ export class LandingService {
         await this.prisma.landing.delete({ where: { id } });
 
         await Promise.allSettled([
-            this.image.delete(iconId).catch((e) =>
-                this.logger.error(
-                    `Landing [id=${id}] deleted but icon [imageId=${iconId}] was not removed.`,
-                    e,
+            iconId &&
+                this.image
+                    .delete(iconId)
+                    .catch((e) =>
+                        this.logger.error(
+                            `Landing [id=${id}] deleted but icon [imageId=${iconId}] was not removed.`,
+                            e,
+                        ),
+                    ),
+            this.image
+                .delete(logoId)
+                .catch((e) =>
+                    this.logger.error(
+                        `Landing [id=${id}] deleted but logo [imageId=${logoId}] was not removed.`,
+                        e,
+                    ),
                 ),
-            ),
-            this.image.delete(logoId).catch((e) =>
-                this.logger.error(
-                    `Landing [id=${id}] deleted but logo [imageId=${logoId}] was not removed.`,
-                    e,
+            this.image
+                .delete(backgroundId)
+                .catch((e) =>
+                    this.logger.error(
+                        `Landing [id=${id}] deleted but background [imageId=${backgroundId}] was not removed.`,
+                        e,
+                    ),
                 ),
-            ),
-            this.image.delete(backgroundId).catch((e) =>
-                this.logger.error(
-                    `Landing [id=${id}] deleted but background [imageId=${backgroundId}] was not removed.`,
-                    e,
-                ),
-            ),
         ]);
     }
 
@@ -271,7 +334,12 @@ export class LandingService {
             include: { icon: true, logo: true, background: true },
         });
 
-        const imageIds = landings.flatMap((l) => [l.iconId, l.logoId, l.backgroundId]);
+        const imageIds = landings.flatMap(
+            (l) =>
+                [l.iconId, l.logoId, l.backgroundId].filter(
+                    Boolean,
+                ) as string[],
+        );
 
         await this.prisma.landing.deleteMany({
             where: { id: { in: landings.map((l) => l.id) } },

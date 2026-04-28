@@ -3,8 +3,8 @@ import { ImageDto } from "./ImageDto";
 export type LandingDto = {
     id: string;
     meta: {
-        title: string;
-        icon: ImageDto;
+        title: string | null;
+        icon: ImageDto | null;
     };
     logo: ImageDto;
     logoHeight: number;
@@ -13,7 +13,7 @@ export type LandingDto = {
     btnName: string;
     title: string;
     background: ImageDto;
-    subtitle: string;
+    subtitle: string | null;
     tokenCount: number;
     createdAt: string;
     updatedAt: string;
