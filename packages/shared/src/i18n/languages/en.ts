@@ -25,6 +25,8 @@ import {
     LANDING_PHONE_MAX_LENGTH,
     LANDING_LOGO_HEIGHT_MIN,
     LANDING_LOGO_HEIGHT_MAX,
+    LANDING_BTN_NAME_MIN_LENGTH,
+    LANDING_BTN_NAME_MAX_LENGTH,
 } from "../../form/constants";
 import { formatBytes } from "../../utils";
 
@@ -120,6 +122,12 @@ export const en: MessageStructure = {
                 label: "Logo height",
                 min: `minimum ${LANDING_LOGO_HEIGHT_MIN}px`,
                 max: `maximum ${LANDING_LOGO_HEIGHT_MAX}px`,
+            },
+            btn: { label: "Button" },
+            btnName: {
+                label: "Button name",
+                min: `minimum ${LANDING_BTN_NAME_MIN_LENGTH} characters`,
+                max: `maximum ${LANDING_BTN_NAME_MAX_LENGTH} characters`,
             },
             meta: { label: "Metadata" },
             icon: { label: "Icon (meta)" },

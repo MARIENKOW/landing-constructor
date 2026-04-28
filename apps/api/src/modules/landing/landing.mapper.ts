@@ -13,6 +13,7 @@ export const mapLanding = (landing: LandingWithImages): LandingDto => ({
     tokenCount: landing._count.tokens,
     color: landing.color,
     phone: landing.phone,
+    btnName: landing.btnName,
     title: landing.title,
     background: mapImage(landing.background),
     subtitle: landing.subtitle,

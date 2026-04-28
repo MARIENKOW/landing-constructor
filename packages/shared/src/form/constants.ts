@@ -85,6 +85,8 @@ export const LANDING_META_TITLE_MIN_LENGTH = 2;
 export const LANDING_META_TITLE_MAX_LENGTH = 100;
 export const LANDING_PHONE_MIN_LENGTH = 7;
 export const LANDING_PHONE_MAX_LENGTH = 30;
+export const LANDING_BTN_NAME_MIN_LENGTH = 2;
+export const LANDING_BTN_NAME_MAX_LENGTH = 100;
 export const LANDING_IMAGE_CONFIG: ImageValidationConfig = {
     maxFileSizeBytes: 50 * 1024 * 1024,
     allowedMimeTypes: ALLOWED_IMAGE_MIME_TYPES,

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { getMessageKey } from "../../../i18n";
 import { LANDING_IMAGE_CONFIG } from "../../constants";
-import { LandingColor, LandingLogoHeight, LandingMetaTitle, LandingPhone, LandingSubtitle, LandingTitle } from "../../fields";
+import { LandingBtnName, LandingColor, LandingLogoHeight, LandingMetaTitle, LandingPhone, LandingSubtitle, LandingTitle } from "../../fields";
 
 const LandingBaseSchema = z.object({
     metaTitle: LandingMetaTitle,
@@ -10,6 +10,7 @@ const LandingBaseSchema = z.object({
     title: LandingTitle,
     subtitle: LandingSubtitle,
     logoHeight: LandingLogoHeight,
+    btnName: LandingBtnName,
 });
 
 const LandingImageField = z

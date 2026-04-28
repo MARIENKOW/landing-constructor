@@ -7,7 +7,7 @@ import { LandingDto } from "@myorg/shared/dto";
 import HeaderUser from "@/components/layout/header/user/HeaderUser";
 
 export default function LandingPage({ landing }: { landing: LandingDto }) {
-    const { title, subtitle, phone, background, logo, color, logoHeight } =
+    const { title, subtitle, phone, background, logo, color, logoHeight, btnName } =
         landing;
     return (
         <Box display={"flex"} flexDirection={"column"} flex={1}>
@@ -43,7 +43,7 @@ export default function LandingPage({ landing }: { landing: LandingDto }) {
                 </Box>
             </Box>
             <Box>
-                <Box
+                {/* <Box
                     component={"a"}
                     href="mailto:den.marienkow@gmail.com"
                     alignItems={"center"}
@@ -77,7 +77,7 @@ export default function LandingPage({ landing }: { landing: LandingDto }) {
                             Email a banker at our call center (after log in)
                         </StyledTypography>
                     </Box>
-                </Box>
+                </Box> */}
                 <StyledDivider />
                 <Box
                     component={"a"}
@@ -105,7 +105,7 @@ export default function LandingPage({ landing }: { landing: LandingDto }) {
                                 fontWeight={500}
                                 display={"inline-flex"}
                             >
-                                Telephone line for overseas customers
+                                {btnName}
                             </StyledTypography>
                             <ArrowForwardIosIcon sx={{ color, fill: color }} />
                         </Box>

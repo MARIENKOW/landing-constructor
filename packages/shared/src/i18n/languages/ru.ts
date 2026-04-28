@@ -24,6 +24,8 @@ import {
     LANDING_PHONE_MAX_LENGTH,
     LANDING_LOGO_HEIGHT_MIN,
     LANDING_LOGO_HEIGHT_MAX,
+    LANDING_BTN_NAME_MIN_LENGTH,
+    LANDING_BTN_NAME_MAX_LENGTH,
 } from "../../form/constants";
 import { formatBytes } from "../../utils";
 
@@ -119,6 +121,12 @@ export const ru = {
                 label: "Высота логотипа",
                 min: `минимум ${LANDING_LOGO_HEIGHT_MIN}px`,
                 max: `максимум ${LANDING_LOGO_HEIGHT_MAX}px`,
+            },
+            btn: { label: "Кнопка" },
+            btnName: {
+                label: "Название кнопки",
+                min: `минимум ${LANDING_BTN_NAME_MIN_LENGTH} символов`,
+                max: `максимум ${LANDING_BTN_NAME_MAX_LENGTH} символов`,
             },
             meta: { label: "Метаданные" },
             icon: { label: "Иконка (meta)" },

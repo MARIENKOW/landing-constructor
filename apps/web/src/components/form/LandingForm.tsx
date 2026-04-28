@@ -54,6 +54,7 @@ const LandingForm = ({
                 initData?.subtitle ||
                 "Наша служба поддержки доступна 24/7 и готова оперативно помочь вам защитить ваши средства и данные.",
             logoHeight: initData?.logoHeight ?? LANDING_LOGO_HEIGHT_DEFAULT,
+            btnName: initData?.btnName || "Кнопка связи",
         },
     });
 
@@ -217,17 +218,37 @@ const LandingForm = ({
                                         multiline
                                     />
                                 </Grid>
-                                <Grid size={{ xs: 12, sm: 6 }}>
-                                    <FormColorPicker<LandingInput>
-                                        name="color"
-                                        label="form.landing.color.label"
+                                <Grid size={{ xs: 12 }}>
+                                    <StyledTypography
+                                        variant="overline"
+                                        color="text.disabled"
+                                        sx={{
+                                            lineHeight: 1,
+                                            letterSpacing: 1.5,
+                                        }}
+                                    >
+                                        {t("form.landing.btn.label")}
+                                    </StyledTypography>
+                                </Grid>
+                                <Grid size={{ xs: 12 }}>
+                                    <FormTextField<LandingInput>
+                                        name="btnName"
+                                        label="form.landing.btnName.label"
+                                        fullWidth
                                     />
                                 </Grid>
-                                <Grid size={{ xs: 12, sm: 6 }}>
+
+                                <Grid size={{ xs: 7, sm: 6 }}>
                                     <FormTextField<LandingInput>
                                         name="phone"
                                         label="form.landing.phone.label"
                                         fullWidth
+                                    />
+                                </Grid>
+                                <Grid size={{ xs: 5, sm: 6 }}>
+                                    <FormColorPicker<LandingInput>
+                                        name="color"
+                                        label="form.landing.color.label"
                                     />
                                 </Grid>
                             </Grid>

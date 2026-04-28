@@ -10,6 +10,7 @@ export type LandingDto = {
     logoHeight: number;
     color: string;
     phone: string;
+    btnName: string;
     title: string;
     background: ImageDto;
     subtitle: string;

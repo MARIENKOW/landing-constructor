@@ -9,6 +9,8 @@ import {
     EMAIL_MAX_LENGTH,
     INVITATION_NOTE_MAX_LENGTH,
     LANDING_LOGO_HEIGHT_DEFAULT,
+    LANDING_BTN_NAME_MAX_LENGTH,
+    LANDING_BTN_NAME_MIN_LENGTH,
     LANDING_LOGO_HEIGHT_MAX,
     LANDING_LOGO_HEIGHT_MIN,
     LANDING_META_TITLE_MAX_LENGTH,
@@ -126,6 +128,14 @@ export const LandingColor = z
     .nonempty(getMessageKey("form.required"))
     .trim()
     .regex(/^#[0-9a-fA-F]{6}$/, getMessageKey("form.landing.color.invalid"));
+
+export const LandingBtnName = z
+    .string()
+    .nonempty(getMessageKey("form.required"))
+    .trim()
+    .normalize()
+    .min(LANDING_BTN_NAME_MIN_LENGTH, { message: getMessageKey("form.landing.btnName.min") })
+    .max(LANDING_BTN_NAME_MAX_LENGTH, getMessageKey("form.landing.btnName.max"));
 
 export const LandingLogoHeight = z
     .coerce.number()

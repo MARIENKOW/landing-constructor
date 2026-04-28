@@ -4,6 +4,7 @@ model Landing {
     logoHeight  Int      @default(40)
     color       String
     phone       String
+    btnName     String   
     title       String
     subtitle    String
     createdAt   DateTime @default(now())
