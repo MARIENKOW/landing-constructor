@@ -5,6 +5,7 @@ import { Box, Toolbar } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { LandingDto } from "@myorg/shared/dto";
 import HeaderUser from "@/components/layout/header/user/HeaderUser";
+import InterpreterModeOutlinedIcon from "@mui/icons-material/InterpreterModeOutlined";
 
 export default function LandingPage({
     landing,
@@ -114,12 +115,15 @@ export default function LandingPage({
                     display={"flex"}
                 >
                     <Box p={admin ? 1 : 2}>
-                        <Box
+                        {/* <Box
                             component={"img"}
                             width={28}
                             height={28}
                             sx={{ fill: color, color }}
                             src={"/Globe.svg"}
+                        /> */}
+                        <InterpreterModeOutlinedIcon
+                            sx={{ width: 28, height: 28, fill: color, color }}
                         />
                     </Box>
                     <Box

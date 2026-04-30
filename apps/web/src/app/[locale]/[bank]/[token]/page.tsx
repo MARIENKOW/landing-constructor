@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
         title: data?.meta.title,
         icons: {
             icon: data?.meta.icon || undefined,
+            
         },
     };
 }
